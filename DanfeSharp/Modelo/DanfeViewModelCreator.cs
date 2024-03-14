@@ -110,15 +110,24 @@ namespace DanfeSharp.Modelo
         }
 
 
-        private static DanfeViewModel CriarDeArquivoXmlInternal(TextReader reader)
+        private static DanfeViewModel CriarDeArquivoXmlInternal(TextReader reader, bool Autorizado = false)
         {
-            ProcNFe nfe = null;
-            XmlSerializer serializer = new XmlSerializer(typeof(ProcNFe));
-
             try
             {
-                nfe = (ProcNFe)serializer.Deserialize(reader);
-                return CreateFromXml(nfe);
+                var nfe = new NFe();
+                ProcNFe nfeTot = new ProcNFe();
+                if (!Autorizado)
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(NFe));
+                    nfe = (NFe)serializer.Deserialize(reader);
+                }
+                else
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(ProcNFe));
+                    nfeTot = (ProcNFe)serializer.Deserialize(reader);
+                }
+                nfeTot.NFe = nfe;
+                return CreateFromXml(nfeTot);
             }
             catch (System.InvalidOperationException e)
             {
@@ -205,9 +214,12 @@ namespace DanfeSharp.Modelo
 
             model.Orientacao = ide.tpImp == 1 ? Orientacao.Retrato : Orientacao.Paisagem;
 
-            var infProt = procNfe.protNFe.infProt;
-            model.CodigoStatusReposta = infProt.cStat;
-            model.DescricaoStatusReposta = infProt.xMotivo;
+            var infProt = procNfe.protNFe?.infProt;
+            if (infProt != null)
+            {
+                model.CodigoStatusReposta = infProt.cStat;
+                model.DescricaoStatusReposta = infProt.xMotivo;
+            }
 
             model.TipoAmbiente = (int)ide.tpAmb;
             model.NfNumero = ide.nNF;
@@ -356,9 +368,10 @@ namespace DanfeSharp.Modelo
                 model.InformacoesAdicionaisFisco = procNfe.NFe.infNFe.infAdic.infAdFisco;
             }
 
-            var infoProto = procNfe.protNFe.infProt;
+            var infoProto = procNfe.protNFe?.infProt;
 
-            model.ProtocoloAutorizacao = String.Format(Formatador.Cultura, "{0} - {1}", infoProto.nProt, infoProto.dhRecbto.DateTimeOffsetValue.DateTime);
+            if (infoProto != null)
+                model.ProtocoloAutorizacao = String.Format(Formatador.Cultura, "{0} - {1}", infoProto.nProt, infoProto.dhRecbto.DateTimeOffsetValue.DateTime);
 
             ExtrairDatas(model, infNfe);
 

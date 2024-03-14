@@ -167,7 +167,8 @@ namespace DanfeSharp
             // Complementares” ou em marca d’água destacada.
             if (ViewModel.TipoAmbiente == 2)
                 p.DesenharAvisoHomologacao();
-
+            else if (string.IsNullOrEmpty(ViewModel.ProtocoloAutorizacao))
+                p.DesenharAvisoNaoAutorizado();
             return p;
         }
 

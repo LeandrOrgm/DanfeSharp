@@ -103,6 +103,18 @@ namespace DanfeSharp
             Gfx.PrimitiveComposer.End();
         }
 
+        public void DesenharAvisoNaoAutorizado()
+        {
+            TextStack ts = new TextStack(RetanguloCorpo) { AlinhamentoVertical = AlinhamentoVertical.Centro, AlinhamentoHorizontal = AlinhamentoHorizontal.Centro, LineHeightScale = 0.9F }
+                        .AddLine("SEM VALOR FISCAL", Danfe.EstiloPadrao.CriarFonteRegular(48))
+                        .AddLine("NFE NÃO AUTORIZADA", Danfe.EstiloPadrao.CriarFonteRegular(30));
+
+            Gfx.PrimitiveComposer.BeginLocalState();
+            Gfx.PrimitiveComposer.SetFillColor(new org.pdfclown.documents.contents.colorSpaces.DeviceRGBColor(0.35, 0.35, 0.35));
+            ts.Draw(Gfx);
+            Gfx.PrimitiveComposer.End();
+        }
+
         public void DesenharBlocos(bool isPrimeirapagina = false)
         {
             if (isPrimeirapagina && Danfe.ViewModel.QuantidadeCanhotos > 0) DesenharCanhoto();
