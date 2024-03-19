@@ -9,11 +9,6 @@ namespace DanfeSharp.Esquemas.NFe
     /// NF-e processada
     /// </summary>
     /// 
-    [XmlRoot("NFe")]
-    public class NFeRoot
-    {
-        public NFe NFe { get; set; }
-    }
 
     [XmlType(Namespace = Namespaces.NFe)]
     [XmlRoot("nfeProc", Namespace = Namespaces.NFe, IsNullable = false)]
@@ -85,7 +80,7 @@ namespace DanfeSharp.Esquemas.NFe
 
 
     [Serializable]
-    [XmlRoot(Namespace = Namespaces.NFe)]
+    [XmlRoot("NFe", Namespace = Namespaces.NFe)]
     public class NFe
     {
         public InfNFe infNFe { get; set; }

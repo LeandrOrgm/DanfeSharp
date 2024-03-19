@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using DanfeSharp.Esquemas.NFe;
 
@@ -110,23 +111,24 @@ namespace DanfeSharp.Modelo
         }
 
 
-        private static DanfeViewModel CriarDeArquivoXmlInternal(TextReader reader, bool Autorizado = false)
+        private static DanfeViewModel CriarDeArquivoXmlInternal(TextReader reader, bool Autorizado = true)
         {
             try
             {
                 var nfe = new NFe();
                 ProcNFe nfeTot = new ProcNFe();
-                if (!Autorizado)
+                XDocument xmlDocument = XDocument.Load(reader);
+                if (xmlDocument.Root.Name.LocalName.Equals("nfeProc"))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(NFe));
-                    nfe = (NFe)serializer.Deserialize(reader);
+                    XmlSerializer serializer = new XmlSerializer(typeof(ProcNFe));
+                    nfeTot = (ProcNFe)serializer.Deserialize(xmlDocument.CreateReader());
                 }
                 else
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(ProcNFe));
-                    nfeTot = (ProcNFe)serializer.Deserialize(reader);
+                    XmlSerializer serializer = new XmlSerializer(typeof(NFe));
+                    nfe = (NFe)serializer.Deserialize(xmlDocument.CreateReader());
+                    nfeTot.NFe = nfe;
                 }
-                nfeTot.NFe = nfe;
                 return CreateFromXml(nfeTot);
             }
             catch (System.InvalidOperationException e)

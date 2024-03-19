@@ -159,7 +159,7 @@ namespace DanfeSharp
             DanfePagina p = new DanfePagina(this);
             Paginas.Add(p);
             p.DesenharBlocos(Paginas.Count == 1);
-            p.DesenharCreditos();
+            //p.DesenharCreditos();
 
             // Ambiente de homologação
             // 7. O DANFE emitido para representar NF-e cujo uso foi autorizado em ambiente de
