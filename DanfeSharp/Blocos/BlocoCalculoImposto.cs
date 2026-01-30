@@ -49,6 +49,13 @@ namespace DanfeSharp.Blocos
 
             l.ComCampoNumerico("Valor Total da Nota", m.ValorTotalNota)
             .ComLargurasIguais();
+
+            l = AdicionarLinhaCampos()
+            .ComCampoNumerico("BASE DE CÁLC. IBS/CBS", m.BaseCalculoIbsCbs)
+            .ComCampoNumerico("VALOR IBS UF", m.ValorIBSUF)
+            .ComCampoNumerico("VALOR IBS MUN.", m.ValorIBSMun)
+            .ComCampoNumerico("VALOR CBS", m.ValorCbs);
+            l.ComLarguras(22.2222f, 22.2222f, 22.2222f, 22.2222f);
         }
 
         public override PosicaoBloco Posicao => PosicaoBloco.Topo;

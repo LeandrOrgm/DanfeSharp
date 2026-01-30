@@ -170,7 +170,7 @@ namespace DanfeSharp.Modelo
             }
         }
 
-        internal static CalculoImpostoViewModel CriarCalculoImpostoViewModel(ICMSTotal i)
+        internal static CalculoImpostoViewModel CriarCalculoImpostoViewModel(ICMSTotal i, IBSCBSTot ic)
         {
             return new CalculoImpostoViewModel()
             {
@@ -191,7 +191,11 @@ namespace DanfeSharp.Modelo
                 ValorTotalNota = i.vNF,
                 vFCPUFDest = i.vFCPUFDest,
                 vICMSUFDest = i.vICMSUFDest,
-                vICMSUFRemet = i.vICMSUFRemet
+                vICMSUFRemet = i.vICMSUFRemet,
+                BaseCalculoIbsCbs = ic?.vBCIBSCBS,
+                ValorIBSUF = ic?.gIBS.gIBSUF.vIBSUF,
+                ValorIBSMun = ic?.gIBS.gIBSMun.vIBSMun,
+                ValorCbs = ic?.gCBS.vCBS
             };
         }
 
@@ -312,7 +316,7 @@ namespace DanfeSharp.Modelo
                 }
             }
 
-            model.CalculoImposto = CriarCalculoImpostoViewModel(infNfe.total.ICMSTot);
+            model.CalculoImposto = CriarCalculoImpostoViewModel(infNfe.total.ICMSTot, infNfe.total.IBSCBSTot);
 
             var issqnTotal = infNfe.total.ISSQNtot;
 

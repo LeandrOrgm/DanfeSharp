@@ -104,5 +104,10 @@
         /// <para>Tag vTotTrib</para>
         /// </summary>
         public double? ValorAproximadoTributos { get; set; }
+
+        public double? BaseCalculoIbsCbs { get; set; }
+        public double? ValorIBSUF { get; set; }
+        public double? ValorIBSMun { get; set; }
+        public double? ValorCbs { get; set; }
     }
 }

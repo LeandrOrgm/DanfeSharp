@@ -536,6 +536,44 @@ namespace DanfeSharp.Esquemas.NFe
         public double? vCOFINS { get; set; }
     }
 
+    [Serializable]
+    [XmlType(AnonymousType = true, Namespace = Namespaces.NFe)]
+    public partial class IBSCBSTot
+    {
+        public double? vBCIBSCBS { get; set; }
+        public GIBS gIBS { get; set; }
+        public GCBS gCBS { get; set; }
+    }
+
+    [Serializable]
+    [XmlType(AnonymousType = true, Namespace = Namespaces.NFe)]
+    public partial class  GIBS
+    {
+        public double? vIBS { get; set; }
+        public GIBSUF gIBSUF { get; set; }
+        public GIBSMun gIBSMun { get; set; }
+    }
+
+    [Serializable]
+    [XmlType(AnonymousType = true, Namespace = Namespaces.NFe)]
+    public partial class GIBSUF
+    {
+        public double? vIBSUF { get; set; }
+    }
+
+    [Serializable]
+    [XmlType(AnonymousType = true, Namespace = Namespaces.NFe)]
+    public partial class GIBSMun
+    {
+        public double? vIBSMun { get; set; }
+    }
+
+    [Serializable]
+    [XmlType(AnonymousType = true, Namespace = Namespaces.NFe)]
+    public partial class GCBS
+    {
+        public double? vCBS { get; set; }
+    }
 
     [Serializable]
     [XmlType(AnonymousType = true, Namespace = Namespaces.NFe)]
@@ -543,6 +581,7 @@ namespace DanfeSharp.Esquemas.NFe
     {
         public ICMSTotal ICMSTot { get; set; }
         public ISSQNTotal ISSQNtot { get; set; }
+        public IBSCBSTot IBSCBSTot { get; set; }
     }
 
 
