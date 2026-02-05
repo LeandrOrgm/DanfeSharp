@@ -193,9 +193,9 @@ namespace DanfeSharp.Modelo
                 vICMSUFDest = i.vICMSUFDest,
                 vICMSUFRemet = i.vICMSUFRemet,
                 BaseCalculoIbsCbs = ic?.vBCIBSCBS,
-                ValorIBSUF = ic?.gIBS.gIBSUF.vIBSUF,
-                ValorIBSMun = ic?.gIBS.gIBSMun.vIBSMun,
-                ValorCbs = ic?.gCBS.vCBS
+                ValorIBSUF = ic?.gIBS?.gIBSUF?.vIBSUF,
+                ValorIBSMun = ic?.gIBS?.gIBSMun?.vIBSMun,
+                ValorCbs = ic?.gCBS?.vCBS
             };
         }
 
